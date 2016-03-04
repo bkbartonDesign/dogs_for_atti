@@ -1,11 +1,11 @@
 <?php
-  error_reporting(E_ALL);
+
+  include("globals.php");
+
+  $auth = "https://api.instagram.com/oauth/authorize/?client_id=d96ed8e9ff184b0ba8b700b8899f76e5&redirect_uri=http://localhost/dogs_for_atti&response_type=code";
+  $url = "https://api.instagram.com/v1/tags/dogsofinstgram/media/recent?access_token=";
 
 
-$auth = "https://api.instagram.com/oauth/authorize/?client_id=2ec444ecc7b8433a86e8415a1b1aa31b&redirect_uri=www.bkbarton.com&response_type=code";
-
-
-$url = "https://api.instagram.com/v1/tags/dogsofinstgram/media/recent?access_token=2ec444ecc7b8433a86e8415a1b1aa31b";
 
 function getUrlContent($url){
   $ch = curl_init();
@@ -16,14 +16,13 @@ function getUrlContent($url){
   curl_setopt($ch, CURLOPT_TIMEOUT, 5);
   $data = curl_exec($ch);
   $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
+  print_r($data);
   curl_close($ch);
   return ($httpcode>=200 && $httpcode<300) ? $data : false;
 }
 
-  $res = getUrlContent($auth);
+  $res = getUrlContent($url);
 
-  print_r($res);
-  echo($res);
-  echo "HI";
+  //print_r($res);
+
 ?>
